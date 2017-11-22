@@ -1,5 +1,5 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <title>Configuring Marlin 1.1 | Marlin 3D Printer Firmware</title> <meta property="og:title" content="Configuring Marlin 1.1"> <meta name="author" content="Sarf2k4"> <meta property="og:locale" content="en_US"> <meta name="description" content="Complete guide to Marlin configuration options."> <meta property="og:description" content="Complete guide to Marlin configuration options."> <link rel="canonical" href="http://marlinfw.org/docs/configuration/configuration.html"> <meta property="og:url" content="http://marlinfw.org/docs/configuration/configuration.html"> <meta property="og:site_name" content="Marlin 3D Printer Firmware"> <meta property="og:type" content="article"> <meta property="article:published_time" content="2017-11-22T02:25:50+00:00"> <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"BlogPosting","headline":"Configuring Marlin 1.1","author":{"@type":"Person","name":"Sarf2k4"},"datePublished":"2017-11-22T02:25:50+00:00","dateModified":"2017-11-22T02:25:50+00:00","description":"Complete guide to Marlin configuration options.","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://marlinfw.org/assets/images/logo/marlin/small.png"},"name":"Sarf2k4"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://marlinfw.org/docs/configuration/configuration.html"},"url":"http://marlinfw.org/docs/configuration/configuration.html"}</script> <link rel="icon" href="/assets/favicon.ico"> <link rel="stylesheet" href="/assets/stylesheets/main.css"> <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]--> <script src="/assets/javascript/head.min.js"></script> <script type="text/javascript">
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <title>Configuring Marlin 1.1 | Marlin 3D Printer Firmware</title> <meta property="og:title" content="Configuring Marlin 1.1"> <meta name="author" content="Sarf2k4"> <meta property="og:locale" content="en_US"> <meta name="description" content="Complete guide to Marlin configuration options."> <meta property="og:description" content="Complete guide to Marlin configuration options."> <link rel="canonical" href="http://marlinfw.org/docs/configuration/configuration.html"> <meta property="og:url" content="http://marlinfw.org/docs/configuration/configuration.html"> <meta property="og:site_name" content="Marlin 3D Printer Firmware"> <meta property="og:type" content="article"> <meta property="article:published_time" content="2017-11-22T02:30:55+00:00"> <script type="application/ld+json">
+{"@context":"http://schema.org","@type":"BlogPosting","headline":"Configuring Marlin 1.1","author":{"@type":"Person","name":"Sarf2k4"},"datePublished":"2017-11-22T02:30:55+00:00","dateModified":"2017-11-22T02:30:55+00:00","description":"Complete guide to Marlin configuration options.","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://marlinfw.org/assets/images/logo/marlin/small.png"},"name":"Sarf2k4"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://marlinfw.org/docs/configuration/configuration.html"},"url":"http://marlinfw.org/docs/configuration/configuration.html"}</script> <link rel="icon" href="/assets/favicon.ico"> <link rel="stylesheet" href="/assets/stylesheets/main.css"> <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]--> <script src="/assets/javascript/head.min.js"></script> <script type="text/javascript">
       /**
        * As Github pages do not support https for custom domains
        * this is the current best workaround for #18.
@@ -529,17 +529,9 @@
   #define CASE_LIGHT_DEFAULT_BRIGHTNESS 105   // Set default power-up brightness (0-255, requires PWM pin)
   //#define MENU_ITEM_CASE_LIGHT              // Add a Case Light option to the LCD main menu
 #endif
-</code></pre> </div> <p>Enable this option for a firmware-controlled digital or PWM case light.</p> <h2 id="more-settings">More settings…</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//===========================================================================
-//============================ Mechanical Settings ==========================
-//===========================================================================
-</span>
-<span class="c1">// @section homing
-</span>
-<span class="c1">// If you want endstops to stay on (by default) even when not homing
+</code></pre> </div> <p>Enable this option for a firmware-controlled digital or PWM case light.</p> <h2 id="more-settings">More settings…</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">// If you want endstops to stay on (by default) even when not homing
 // enable this option. Override at any time with M120, M121.
 //#define ENDSTOPS_ALWAYS_ON_DEFAULT
-</span>
-<span class="c1">// @section extras
 </span>
 <span class="c1">//#define Z_LATE_ENABLE // Enable Z the last moment. Needed if your Z driver overheats.
 </span>
@@ -630,8 +622,6 @@
 // Define SOL0_PIN, SOL1_PIN, etc., for each extruder that has a solenoid.
 //#define EXT_SOLENOID
 </span>
-<span class="c1">// @section homing
-</span>
 <span class="c1">// Homing hits each endstop, retracts by these distances, then does a slower bump.
 </span><span class="cp">#define X_HOME_BUMP_MM 5
 #define Y_HOME_BUMP_MM 5
@@ -641,8 +631,6 @@
 </span>
 <span class="c1">// When G28 is called, this option will make Y home before X
 //#define HOME_Y_BEFORE_X
-</span>
-<span class="c1">// @section machine
 </span>
 <span class="cp">#define AXIS_RELATIVE_MODES {false, false, false, false}
 </span>
@@ -669,14 +657,10 @@
 </span>
 <span class="c1">//#define HOME_AFTER_DEACTIVATE  // Require rehoming after steppers are deactivated
 </span>
-<span class="c1">// @section lcd
-</span>
 <span class="cp">#if ENABLED(ULTIPANEL)
 </span>  <span class="cp">#define MANUAL_FEEDRATE {50*60, 50*60, 4*60, 60} // Feedrates for manual moves along X, Y, Z, E from panel
 </span>  <span class="cp">#define ULTIPANEL_FEEDMULTIPLY  // Comment to disable setting feedrate multiplier via encoder
 #endif
-</span>
-<span class="c1">// @section extras
 </span>
 <span class="c1">// minimum time in microseconds that a movement needs to take if the buffer is emptied.
 </span><span class="cp">#define DEFAULT_MINSEGMENTTIME        20000
@@ -698,8 +682,6 @@
 </span><span class="cp">#define MICROSTEP_MODES {16,16,16,16,16} // [1,2,4,8,16]
 </span>
 <span class="cm">/**
- *  @section  stepper motor current
- *
  *  Some boards have a means of setting the stepper motor current via firmware.
  *
  *  The power on motor currents are set by:
@@ -751,8 +733,6 @@
 </span>
 <span class="c1">//#define CHDK 4        //Pin for triggering CHDK to take a picture see how to use it here http://captain-slow.dk/2014/03/09/3d-printing-timelapses/
 </span><span class="cp">#define CHDK_DELAY 50 //How long in ms the pin should stay HIGH before going LOW again
-</span>
-<span class="c1">// @section lcd
 </span>
 <span class="c1">// Include a page of printer information in the LCD Main Menu
 //#define LCD_INFO_MENU
@@ -897,8 +877,6 @@
 </span>
 <span class="cp">#endif // DOGLCD
 </span>
-<span class="c1">// @section safety
-</span>
 <span class="c1">// The hardware watchdog should reset the microcontroller disabling all outputs,
 // in case the firmware gets stuck and doesn't do temperature regulation.
 </span><span class="cp">#define USE_WATCHDOG
@@ -909,8 +887,6 @@
 </span>  <span class="c1">//  However, THIS FEATURE IS UNSAFE!, as it will only work if interrupts are disabled. And the code could hang in an interrupt routine with interrupts disabled.
 </span>  <span class="c1">//#define WATCHDOG_RESET_MANUAL
 </span><span class="cp">#endif
-</span>
-<span class="c1">// @section lcd
 </span>
 <span class="cm">/**
  * Babystepping enables movement of the axes by tiny increments without changing
@@ -931,8 +907,6 @@
 </span>  <span class="c1">//#define BABYSTEP_ZPROBE_GFX_OVERLAY // Enable graphical overlay on Z-offset editor
 </span>  <span class="c1">//#define BABYSTEP_ZPROBE_GFX_REVERSE // Reverses the direction of the CW/CCW indicators
 </span><span class="cp">#endif
-</span>
-<span class="c1">// @section extruder
 </span>
 <span class="cm">/**
  * Implementation of linear pressure control
@@ -974,8 +948,6 @@
 </span>                                  <span class="c1">// Example: 0.4 * 0.2 / ((1.75 / 2) ^ 2 * PI) = 0.033260135
 </span><span class="cp">#endif
 </span>
-<span class="c1">// @section leveling
-</span>
 <span class="cp">#if ENABLED(DELTA) &amp;&amp; !defined(DELTA_PROBEABLE_RADIUS)
 </span>  <span class="cp">#define DELTA_PROBEABLE_RADIUS DELTA_PRINTABLE_RADIUS
 #elif IS_SCARA &amp;&amp; !defined(SCARA_PRINTABLE_RADIUS)
@@ -989,8 +961,6 @@
 </span>  <span class="c1">//#define MESH_MAX_X X_BED_SIZE - (MESH_INSET)
 </span>  <span class="c1">//#define MESH_MAX_Y Y_BED_SIZE - (MESH_INSET)
 </span><span class="cp">#endif
-</span>
-<span class="c1">// @section extras
 </span>
 <span class="c1">//
 // G2/G3 Arc Support
@@ -1020,16 +990,8 @@
 // Set this if you find stepping unreliable, or if using a very fast CPU.
 </span><span class="cp">#define MINIMUM_STEPPER_PULSE 0 // (µs) The smallest stepper pulse allowed
 </span>
-<span class="c1">// @section temperature
-</span>
 <span class="c1">// Control heater 0 and heater 1 in parallel.
 //#define HEATERS_PARALLEL
-</span>
-<span class="c1">//===========================================================================
-//================================= Buffers =================================
-//===========================================================================
-</span>
-<span class="c1">// @section hidden
 </span>
 <span class="c1">// The number of linear motions that can be in the plan at any give time.
 // THE BLOCK_BUFFER_SIZE NEEDS TO BE A POWER OF 2, i.g. 8,16,32 because shifts and ors are used to do the ring-buffering.
@@ -1038,8 +1000,6 @@
 #else
 </span>  <span class="cp">#define BLOCK_BUFFER_SIZE 16 // maximize block buffer
 #endif
-</span>
-<span class="c1">// @section serial
 </span>
 <span class="c1">// The ASCII buffer for serial input
 </span><span class="cp">#define MAX_CMD_SIZE 96
@@ -1090,8 +1050,6 @@
 </span>
 <span class="c1">// Some clients will have this feature soon. This could make the NO_TIMEOUTS unnecessary.
 //#define ADVANCED_OK
-</span>
-<span class="c1">// @section extras
 </span>
 <span class="cm">/**
  * Firmware-based and LCD-controlled retract
@@ -1172,8 +1130,6 @@
 </span>  <span class="c1">//#define HOME_BEFORE_FILAMENT_CHANGE       // Ensure homing has been completed prior to parking for filament change
 </span><span class="cp">#endif
 </span>
-<span class="c1">// @section tmc
-</span>
 <span class="cm">/**
  * Enable this section if you have TMC26X motor drivers.
  * You will need to import the TMC26XStepper library into the Arduino IDE for this
@@ -1240,8 +1196,6 @@
 </span>  <span class="cp">#define E4_MICROSTEPS       16
 </span>
 <span class="cp">#endif
-</span>
-<span class="c1">// @section TMC2130
 </span>
 <span class="cm">/**
  * Enable this for SilentStepStick Trinamic TMC2130 SPI-configurable stepper drivers.
@@ -1392,8 +1346,6 @@
 </span>
 <span class="cp">#endif // HAVE_TMC2130
 </span>
-<span class="c1">// @section L6470
-</span>
 <span class="cm">/**
  * Enable this section if you have L6470 motor drivers.
  * You need to import the L6470 library into the Arduino IDE for this.
@@ -1489,12 +1441,8 @@
  * echo:i2c-reply: from:99 bytes:5 data:hello
  */</span>
 
-<span class="c1">// @section i2cbus
-</span>
 <span class="c1">//#define EXPERIMENTAL_I2CBUS
 </span><span class="cp">#define I2C_SLAVE_ADDRESS  0 // Set a value from 8 to 127 to act as a slave
-</span>
-<span class="c1">// @section extras
 </span>
 <span class="cm">/**
  * Spindle &amp; Laser control
@@ -1588,10 +1536,6 @@
  * The host must be configured to handle the action command.
  */</span>
 <span class="c1">//#define ACTION_ON_KILL "poweroff"
-</span>
-<span class="c1">//===========================================================================
-//====================== I2C Position Encoder Settings ======================
-//===========================================================================
 </span>
 <span class="cm">/**
  *  I2C position encoders for closed loop control.
