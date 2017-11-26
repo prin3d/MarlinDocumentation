@@ -1,5 +1,5 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <title>Configuring Marlin 1.1 | Marlin 3D Printer Firmware</title> <meta property="og:title" content="Configuring Marlin 1.1"> <meta name="author" content="Sarf2k4"> <meta property="og:locale" content="en_US"> <meta name="description" content="Complete guide to Marlin configuration options."> <meta property="og:description" content="Complete guide to Marlin configuration options."> <link rel="canonical" href="http://marlinfw.org/docs/configuration/configuration.html"> <meta property="og:url" content="http://marlinfw.org/docs/configuration/configuration.html"> <meta property="og:site_name" content="Marlin 3D Printer Firmware"> <meta property="og:type" content="article"> <meta property="article:published_time" content="2017-11-26T19:45:29+00:00"> <script type="application/ld+json">
-{"@context":"http://schema.org","@type":"BlogPosting","headline":"Configuring Marlin 1.1","author":{"@type":"Person","name":"Sarf2k4"},"datePublished":"2017-11-26T19:45:29+00:00","dateModified":"2017-11-26T19:45:29+00:00","description":"Complete guide to Marlin configuration options.","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://marlinfw.org/assets/images/logo/marlin/small.png"},"name":"Sarf2k4"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://marlinfw.org/docs/configuration/configuration.html"},"url":"http://marlinfw.org/docs/configuration/configuration.html"}</script> <link rel="icon" href="/assets/favicon.ico"> <link rel="stylesheet" href="/assets/stylesheets/main.css"> <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]--> <script src="/assets/javascript/head.min.js"></script> <script type="text/javascript">
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <title>Configuring Marlin 1.1 | Marlin 3D Printer Firmware</title> <meta property="og:title" content="Configuring Marlin 1.1"> <meta name="author" content="Sarf2k4"> <meta property="og:locale" content="en_US"> <meta name="description" content="Complete guide to Marlin configuration options."> <meta property="og:description" content="Complete guide to Marlin configuration options."> <link rel="canonical" href="http://marlinfw.org/docs/configuration/configuration.html"> <meta property="og:url" content="http://marlinfw.org/docs/configuration/configuration.html"> <meta property="og:site_name" content="Marlin 3D Printer Firmware"> <meta property="og:type" content="article"> <meta property="article:published_time" content="2017-11-26T23:40:24+00:00"> <script type="application/ld+json">
+{"@context":"http://schema.org","@type":"BlogPosting","headline":"Configuring Marlin 1.1","author":{"@type":"Person","name":"Sarf2k4"},"datePublished":"2017-11-26T23:40:24+00:00","dateModified":"2017-11-26T23:40:24+00:00","description":"Complete guide to Marlin configuration options.","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://marlinfw.org/assets/images/logo/marlin/small.png"},"name":"Sarf2k4"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://marlinfw.org/docs/configuration/configuration.html"},"url":"http://marlinfw.org/docs/configuration/configuration.html"}</script> <link rel="icon" href="/assets/favicon.ico"> <link rel="stylesheet" href="/assets/stylesheets/main.css"> <!--[if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script> <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]--> <script src="/assets/javascript/head.min.js"></script> <script type="text/javascript">
       /**
        * As Github pages do not support https for custom domains
        * this is the current best workaround for #18.
@@ -337,7 +337,17 @@
 </span>  <span class="cp">#define FILAMENT_RUNOUT_SCRIPT "M600"
 #endif
 </span></code></pre> </div> <p>With this feature, a mechanical or opto endstop switch is used to check for the presence of filament in the feeder (usually the switch is closed when filament is present). If the filament runs out, Marlin will run the specified GCode script (by default “<code class="highlighter-rouge">M600</code>”). RAMPS-based boards use <code class="highlighter-rouge">SERVO3_PIN</code>. For other boards you may need to define <code class="highlighter-rouge">FIL_RUNOUT_PIN</code>.</p> <h2 id="bed-leveling">Bed Leveling</h2> <p><img src="/assets/images/config/bedlevel.png" alt="Bed Level" class="floater"></p> <p>There are many cases where it’s useful to measure variances in bed height. Even if the bed on a 3D printer is perfectly flat and level, there may still be imperfections in the mechanics. For example, a machine may have a very flat bed, but a corner of the XY gantry is a half-mm high. The ends of the Z axis may not be perfectly level. The bed may move slightly in the Z plane as it moves in the X and/or Y plane. On a Delta there may be a lingering bowl-shape to its XY trajectory.</p> <p>Bed Compensation or “— Bed Leveling” allows the machine —with a bed probe or user assistance— to take accurate measurements of the “bed height” at various points in the XY plane. With this data the machine can then adjust movement to align better to the tilt or “height” variances in the bed. (I’m scare-quoting “height” here because variances may come from other than the bed.)</p> <p>For more details on these features, see <a href="/docs/gcode/G029-mbl.html"><code class="highlighter-rouge">G29</code> for MBL</a> and <a href="/docs/gcode/G029-abl.html"><code class="highlighter-rouge">G29</code> for ABL</a>.</p> <h3 id="debug-leveling">Debug Leveling</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define DEBUG_LEVELING_FEATURE
-</span></code></pre> </div> <p>Use this option to enable extra debugging of homing and leveling. You can then use <code class="highlighter-rouge">M111 S32</code> before issuing <code class="highlighter-rouge">G28</code> and <code class="highlighter-rouge">G29 V4</code> to get a detailed log of the process for diagnosis. This option is useful to figure out the cause of unexpected behaviors, or when reporting issues to the project.</p> <h3 id="leveling-fade-height">Leveling Fade Height</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#define ENABLE_LEVELING_FADE_HEIGHT
+</span></code></pre> </div> <p>Use this option to enable extra debugging of homing and leveling. You can then use <code class="highlighter-rouge">M111 S32</code> before issuing <code class="highlighter-rouge">G28</code> and <code class="highlighter-rouge">G29 V4</code> to get a detailed log of the process for diagnosis. This option is useful to figure out the cause of unexpected behaviors, or when reporting issues to the project.</p> <h4 id="g26-mesh-validation-pattern">G26 Mesh Validation Pattern</h4> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cm">/**
+ * Enable the G26 Mesh Validation Pattern tool.
+ */</span>
+<span class="cp">#define G26_MESH_VALIDATION   // Enable G26 mesh validation
+#if ENABLED(G26_MESH_VALIDATION)
+</span>  <span class="cp">#define MESH_TEST_NOZZLE_SIZE     0.4   // (mm) Diameter of primary nozzle.
+</span>  <span class="cp">#define MESH_TEST_LAYER_HEIGHT    0.2   // (mm) Default layer height for the G26 Mesh Validation Tool.
+</span>  <span class="cp">#define MESH_TEST_HOTEND_TEMP   205.0   // (°C) Default nozzle temperature for the G26 Mesh Validation Tool.
+</span>  <span class="cp">#define MESH_TEST_BED_TEMP       60.0   // (°C) Default bed temperature for the G26 Mesh Validation Tool.
+#endif
+</span></code></pre> </div> <p>When using any of the mesh-based leveling systems (1.1.7) you can activate <code class="highlighter-rouge">G26_MESH_VALIDATION</code> to print test patterns and fine-tune the mesh. See <a href="http://marlinfw.org/docs/gcode/G026.html"><code class="highlighter-rouge">G26</code> Mesh Validation</a> for full details. The <code class="highlighter-rouge">G26</code> command accepts parameters for nozzle size, layer height, etc. The sub-options above specify the default values that will be applied for omitted parameters.</p> <h3 id="leveling-fade-height">Leveling Fade Height</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#define ENABLE_LEVELING_FADE_HEIGHT
 </span></code></pre> </div> <p>Available with <code class="highlighter-rouge">MESH_BED_LEVELING</code>, <code class="highlighter-rouge">AUTO_BED_LEVELING_BILINEAR</code>, and <code class="highlighter-rouge">AUTO_BED_LEVELING_UBL</code>.</p> <p>This option adds the <code class="highlighter-rouge">Z</code> parameter to <code class="highlighter-rouge">M420</code> which sets a fade distance over which leveling will be gradually reduced. Above the given Z height, leveling compensation will no longer be applied.</p> <p>This feature exists to prevent irregularities in the bed from propagating through the model’s entire height. Fading out leveling also reduces computational requirements and resonance from the Z axis above the fade height. For a well-aligned machine, this feature can improve print results.</p> <p>Example: To have leveling fade out over the first 10mm of layer printing use <code class="highlighter-rouge">M420 Z10</code>. If each layer is 0.2mm high, leveling compensation will be reduced by 1/50th (2%) after each layer. Above 10mm the machine will move without compensation.</p> <h3 id="bed-leveling-style">Bed Leveling Style</h3> <p>Bed Leveling is a standard feature on many 3D printers. It takes the guess-work out of getting a good first layer and good bed adhesion. All forms of bed leveling add <code class="highlighter-rouge">G29</code> Bed Probing, <code class="highlighter-rouge">M420</code> enable/disable, and can save their results to EEPROM with <code class="highlighter-rouge">M500</code>. Bravo!</p> <p>With Bed Leveling enabled:</p> <ul> <li> <code class="highlighter-rouge">G28</code> disables bed leveling, but leaves previous leveling data intact.</li> <li> <code class="highlighter-rouge">G29</code> automatically or manually probes the bed at various points, measures the bed height, calculates a correction grid or matrix, and turns on leveling compensation. Specific behavior depends on configuration and type of bed leveling.</li> <li> <code class="highlighter-rouge">M500</code> saves the bed leveling data to EEPROM. Use <code class="highlighter-rouge">M501</code> to load it, <code class="highlighter-rouge">M502</code> to clear it, and <code class="highlighter-rouge">M503</code> to report it.</li> <li> <code class="highlighter-rouge">M420 S&lt;bool&gt;</code> can be used to enable/disable bed leveling. For example, <code class="highlighter-rouge">M420 S1</code> must be used after <code class="highlighter-rouge">M501</code> to enable the loaded mesh or matrix, and to re-enable leveling after <code class="highlighter-rouge">G28</code>, which disables leveling compensation.</li> <li>A “Level Bed” menu item can be added to the LCD with the <code class="highlighter-rouge">LCD_BED_LEVELING</code> option.</li> </ul> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
 //#define AUTO_BED_LEVELING_BILINEAR
@@ -371,8 +381,7 @@
 #define UBL_PROBE_PT_2_Y 20
 #define UBL_PROBE_PT_3_X 180
 #define UBL_PROBE_PT_3_Y 20
-</span></code></pre> </div> <p>These options specify the inset, grid, and 3-point triangle to use for UBL. Note that probe XY offsets and movement limits may constrain the probeable area of the bed.</p> <h4 id="g26-mesh-editing--debugging">G26 Mesh Editing &amp; Debugging</h4> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define UBL_G26_MESH_EDITING
-</span></code></pre> </div> <p>Enable this option for <code class="highlighter-rouge">G26</code> Mesh Editing. (Documentation coming soon!)</p> <h3 id="mesh-bed-leveling-options">Mesh Bed Leveling Options</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#define MESH_INSET 10          // Mesh inset margin on print area
+</span></code></pre> </div> <p>These options specify the inset, grid, and 3-point triangle to use for UBL. Note that probe XY offsets and movement limits may constrain the probeable area of the bed.</p> <h3 id="mesh-bed-leveling-options">Mesh Bed Leveling Options</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#define MESH_INSET 10          // Mesh inset margin on print area
 #define GRID_MAX_POINTS_X 3    // Don't use more than 7 points per axis, implementation limited.
 #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 </span>
@@ -494,9 +503,9 @@
 </span></code></pre> </div> <p>With Automatic Temperature the hotend target temperature is calculated by all the buffered lines of gcode. The maximum buffered steps/sec of the extruder motor is called “<code class="highlighter-rouge">se</code>”. Start autotemp mode with <code class="highlighter-rouge">M109 F&lt;factor&gt; S&lt;mintemp&gt; B&lt;maxtemp&gt;</code>, giving a range of temperatures. The target temperature is set to <code class="highlighter-rouge">mintemp + factor * se[steps/sec]</code> and is limited by <code class="highlighter-rouge">mintemp</code> and <code class="highlighter-rouge">maxtemp</code>. Turn this off by executing <code class="highlighter-rouge">M109</code> without <code class="highlighter-rouge">F</code>. If the temperature is set to a value below <code class="highlighter-rouge">mintemp</code> (e.g., by <code class="highlighter-rouge">M104</code>) autotemp will not be applied.</p> <p>Example: Try <code class="highlighter-rouge">M109 S215 B260 F1</code> in your <code class="highlighter-rouge">start.gcode</code> to set a minimum temperature of 215 when idle, which will boost up to 260 as extrusion increases in speed.</p> <h3 id="temperature-report-adc">Temperature Report ADC</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define SHOW_TEMP_ADC_VALUES
 </span></code></pre> </div> <p>Enable this option to have <code class="highlighter-rouge">M105</code> and automatic temperature reports include raw ADC values from the temperature sensors.</p> <h3 id="high-temperature-thermistors">High Temperature Thermistors</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define MAX_CONSECUTIVE_LOW_TEMPERATURE_ERROR_ALLOWED 0
 </span></code></pre> </div> <p>High temperature thermistors may give aberrant readings. If this is an issue, use this option to set the maximum number of consecutive low temperature errors that can occur before Min Temp Error is triggered. If you require a value over 10, this could indicate a problem.</p> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define MILLISECONDS_PREHEAT_TIME 0
-</span></code></pre> </div> <p>High Temperature Thermistors tend to give poor readings at ambient and lower temperatures. Until they reach a sufficient temperature, these sensors usually return the lowest raw value, and this will cause a Min Temp Error.</p> <p>To solve this issue, this option sets the number of milliseconds a hotend will preheat before Marlin starts to check the temperature. Set a delay sufficient to reach a temperature your sensor can reliably read. Lower values are better and safer. If you require a value over 30000, this could indicate a problem.</p> <h2 id="ad595">AD595</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#define TEMP_SENSOR_AD595_OFFSET 0.0
+</span></code></pre> </div> <p>High Temperature Thermistors tend to give poor readings at ambient and lower temperatures. Until they reach a sufficient temperature, these sensors usually return the lowest raw value, and this will cause a Min Temp Error.</p> <p>To solve this issue, this option sets the number of milliseconds a hotend will preheat before Marlin starts to check the temperature. Set a delay sufficient to reach a temperature your sensor can reliably read. Lower values are better and safer. If you require a value over 30000, this could indicate a problem.</p> <h3 id="ad595">AD595</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#define TEMP_SENSOR_AD595_OFFSET 0.0
 #define TEMP_SENSOR_AD595_GAIN   1.0
-</span></code></pre> </div> <p>These defines help to calibrate the AD595 sensor in case you get wrong temperature measurements. The final reading is derived from <code class="highlighter-rouge">measuredTemp * TEMP_SENSOR_AD595_GAIN + TEMP_SENSOR_AD595_OFFSET</code>.</p> <h2 id="extruder-runout-prevention">Extruder Runout Prevention</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define EXTRUDER_RUNOUT_PREVENT
+</span></code></pre> </div> <p>These defines help to calibrate the AD595 sensor in case you get wrong temperature measurements. The final reading is derived from <code class="highlighter-rouge">measuredTemp * TEMP_SENSOR_AD595_GAIN + TEMP_SENSOR_AD595_OFFSET</code>.</p> <h3 id="extruder-runout-prevention">Extruder Runout Prevention</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define EXTRUDER_RUNOUT_PREVENT
 </span><span class="cp">#if ENABLED(EXTRUDER_RUNOUT_PREVENT)
 </span>  <span class="cp">#define EXTRUDER_RUNOUT_MINTEMP 190
 </span>  <span class="cp">#define EXTRUDER_RUNOUT_SECONDS 30
@@ -529,28 +538,9 @@
   #define CASE_LIGHT_DEFAULT_BRIGHTNESS 105   // Set default power-up brightness (0-255, requires PWM pin)
   //#define MENU_ITEM_CASE_LIGHT              // Add a Case Light option to the LCD main menu
 #endif
-</code></pre> </div> <p>Enable this option for a firmware-controlled digital or PWM case light.</p> <h2 id="more-settings">More settings…</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">// If you want endstops to stay on (by default) even when not homing
-// enable this option. Override at any time with M120, M121.
-//#define ENDSTOPS_ALWAYS_ON_DEFAULT
-</span>
-<span class="c1">//#define Z_LATE_ENABLE // Enable Z the last moment. Needed if your Z driver overheats.
-</span>
-<span class="cm">/**
- * Dual Steppers / Dual Endstops
- *
- * This section will allow you to use extra E drivers to drive a second motor for X, Y, or Z axes.
- *
- * For example, set X_DUAL_STEPPER_DRIVERS setting to use a second motor. If the motors need to
- * spin in opposite directions set INVERT_X2_VS_X_DIR. If the second motor needs its own endstop
- * set X_DUAL_ENDSTOPS. This can adjust for "racking." Use X2_USE_ENDSTOP to set the endstop plug
- * that should be used for the second endstop. Extra endstops will appear in the output of 'M119'.
- *
- * Use X_DUAL_ENDSTOP_ADJUSTMENT to adjust for mechanical imperfection. After homing both motors
- * this offset is applied to the X2 motor. To find the offset home the X axis, and measure the error
- * in X2. Dual endstop offsets can be set at runtime with 'M666 X&lt;offset&gt; Y&lt;offset&gt; Z&lt;offset&gt;'.
- */</span>
-
-<span class="c1">//#define X_DUAL_STEPPER_DRIVERS
+</code></pre> </div> <p>Enable this option for a firmware-controlled digital or PWM case light.</p> <h2 id="endstops-always-on">Endstops Always On</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define ENDSTOPS_ALWAYS_ON_DEFAULT
+</span></code></pre> </div> <p>Enable this option to keep the endstops on (by default) even when not homing. Override at any time with <a href="/docs/gcode/M120.html"><code class="highlighter-rouge">M120</code></a>, <a href="/docs/gcode/M121.html"><code class="highlighter-rouge">M121</code></a>.</p> <h2 id="z-late-enable">Z Late Enable</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define Z_LATE_ENABLE
+</span></code></pre> </div> <p>With this option is active, the Z steppers will only turn on at the last moment before they move. This option may be needed if your Z driver tends to overheat. Not compatible with Core kinematics.</p> <h2 id="dual-steppers--dual-endstops">Dual Steppers / Dual Endstops</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define X_DUAL_STEPPER_DRIVERS
 </span><span class="cp">#if ENABLED(X_DUAL_STEPPER_DRIVERS)
 </span>  <span class="cp">#define INVERT_X2_VS_X_DIR true   // Set 'true' if X motors should rotate in opposite directions
 </span>  <span class="c1">//#define X_DUAL_ENDSTOPS
@@ -578,47 +568,24 @@
 </span>    <span class="cp">#define Z_DUAL_ENDSTOPS_ADJUSTMENT  0
 </span>  <span class="cp">#endif
 #endif
-</span>
-<span class="c1">// Enable this for dual x-carriage printers.
-// A dual x-carriage design has the advantage that the inactive extruder can be parked which
-// prevents hot-end ooze contaminating the print. It also reduces the weight of each x-carriage
-// allowing faster printing speeds. Connect your X2 stepper to the first unused E plug.
-//#define DUAL_X_CARRIAGE
+</span></code></pre> </div> <p>These options allow you to use extra E drivers to drive a second motor for X, Y, and/or Z axes.</p> <p>Set <code class="highlighter-rouge">X_DUAL_STEPPER_DRIVERS</code> to use a second X motor. If the X motors need to spin in opposite directions set <code class="highlighter-rouge">INVERT_X2_VS_X_DIR</code> to <code class="highlighter-rouge">true</code>. If the second motor has its own endstop set <code class="highlighter-rouge">X_DUAL_ENDSTOPS</code>. (This can adjust for “racking.”) Use <code class="highlighter-rouge">X2_USE_ENDSTOP</code> to set the endstop plug that should be used for the second endstop. Extra endstops will appear in the output of ‘M119’.</p> <p>If the two X axes aren’t perfectly aligned, use <code class="highlighter-rouge">X_DUAL_ENDSTOP_ADJUSTMENT</code> to adjust for the difference. This offset is applied to the X2 motor after homing with <code class="highlighter-rouge">G28</code>. The dual endstop offsets can be set at runtime with <code class="highlighter-rouge">M666 X[offset] Y[offset] Z[offset]</code>.</p> <h2 id="dual-x-carriage">Dual X Carriage</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define DUAL_X_CARRIAGE
 </span><span class="cp">#if ENABLED(DUAL_X_CARRIAGE)
-</span>  <span class="c1">// Configuration for second X-carriage
-</span>  <span class="c1">// Note: the first x-carriage is defined as the x-carriage which homes to the minimum endstop;
-</span>  <span class="c1">// the second x-carriage always homes to the maximum endstop.
-</span>  <span class="cp">#define X2_MIN_POS 80     // set minimum to ensure second x-carriage doesn't hit the parked first X-carriage
-</span>  <span class="cp">#define X2_MAX_POS 353    // set maximum to the distance between toolheads when both heads are homed
-</span>  <span class="cp">#define X2_HOME_DIR 1     // the second X-carriage always homes to the maximum endstop position
-</span>  <span class="cp">#define X2_HOME_POS X2_MAX_POS // default home position is the maximum carriage position
-</span>      <span class="c1">// However: In this mode the HOTEND_OFFSET_X value for the second extruder provides a software
-</span>      <span class="c1">// override for X2_HOME_POS. This also allow recalibration of the distance between the two endstops
-</span>      <span class="c1">// without modifying the firmware (through the "M218 T1 X???" command).
-</span>      <span class="c1">// Remember: you should set the second extruder x-offset to 0 in your slicer.
+</span>  <span class="cp">#define X2_MIN_POS  80          // Minimum X to ensure that X-carriage T1 doesn't hit parked X-carriage T0
+</span>  <span class="cp">#define X2_MAX_POS 353          // Maximum to the distance between toolheads when both heads are homed
+</span>  <span class="cp">#define X2_HOME_DIR  1          // The second X-carriage always homes to the max endstop position
+</span>  <span class="cp">#define X2_HOME_POS X2_MAX_POS  // Default home position is the maximum carriage position
 </span>
-  <span class="c1">// There are a few selectable movement modes for dual x-carriages using M605 S&lt;mode&gt;
-</span>  <span class="c1">//    Mode 0 (DXC_FULL_CONTROL_MODE): Full control. The slicer has full control over both x-carriages and can achieve optimal travel results
-</span>  <span class="c1">//                                    as long as it supports dual x-carriages. (M605 S0)
-</span>  <span class="c1">//    Mode 1 (DXC_AUTO_PARK_MODE)   : Auto-park mode. The firmware will automatically park and unpark the x-carriages on tool changes so
-</span>  <span class="c1">//                                    that additional slicer support is not required. (M605 S1)
-</span>  <span class="c1">//    Mode 2 (DXC_DUPLICATION_MODE) : Duplication mode. The firmware will transparently make the second x-carriage and extruder copy all
-</span>  <span class="c1">//                                    actions of the first x-carriage. This allows the printer to print 2 arbitrary items at
-</span>  <span class="c1">//                                    once. (2nd extruder x offset and temp offset are set using: M605 S2 [Xnnn] [Rmmm])
-</span>
-  <span class="c1">// This is the default power-up mode which can be later using M605.
+  <span class="c1">// Default power-up mode. Set at runtime with `M605 S[mode]`.
 </span>  <span class="cp">#define DEFAULT_DUAL_X_CARRIAGE_MODE DXC_FULL_CONTROL_MODE
 </span>
-  <span class="c1">// Default settings in "Auto-park Mode"
-</span>  <span class="cp">#define TOOLCHANGE_PARK_ZLIFT   0.2      // the distance to raise Z axis when parking an extruder
-</span>  <span class="cp">#define TOOLCHANGE_UNPARK_ZLIFT 1        // the distance to raise Z axis when unparking an extruder
+  <span class="c1">// Default settings in Auto-park Mode
+</span>  <span class="cp">#define TOOLCHANGE_PARK_ZLIFT   0.2      // (mm) Amount to raise Z axis when parking
+</span>  <span class="cp">#define TOOLCHANGE_UNPARK_ZLIFT 1        // (mm) Amount to raise Z axis when unparking
 </span>
-  <span class="c1">// Default x offset in duplication mode (typically set to half print bed width)
+  <span class="c1">// Default X offset in Duplication Mode (typically set to half print bed width)
 </span>  <span class="cp">#define DEFAULT_DUPLICATION_X_OFFSET 100
-</span>
-<span class="cp">#endif // DUAL_X_CARRIAGE
-</span>
-<span class="c1">// Activate a solenoid on the active extruder with M380. Disable all with M381.
+#endif
+</span></code></pre> </div> <p>Enable this option if you have Dual X-Carriages that move independently. The Dual X-Carriage design allows the inactive extruder to be parked, which keeps ooze from contaminating the print, reduces the weight of each carriage, and enables faster printing speeds. With this option simply connect the X2 stepper to the first unused E plug.</p> <p>In a Dual X-Carriage setup the first x-carriage (<code class="highlighter-rouge">T0</code>) homes to the minimum endstop, while the second x-carriage (<code class="highlighter-rouge">T1</code>) homes to the maximum endstop.</p> <p>With Dual X-Carriage the <code class="highlighter-rouge">HOTEND_OFFSET_X</code> setting for <code class="highlighter-rouge">T1</code> overrides <code class="highlighter-rouge">X2_HOME_POS</code>. Use <code class="highlighter-rouge">M218 T1 X[homepos]</code> to set a custom X2 home position, and <code class="highlighter-rouge">M218 T1 X0</code> to use <code class="highlighter-rouge">X2_HOME_POS</code>. This offset can be saved to EEPROM with <code class="highlighter-rouge">M500</code>.</p> <p><strong>In your slicer, be sure to set the second extruder X-offset to 0.</strong></p> <p>Dual X-Carriage has three different movement modes, set with <code class="highlighter-rouge">M605 S[mode]</code>:</p> <ul> <li>Mode 0: Full Control Mode. (<code class="highlighter-rouge">M605 S1</code>) Slicers that fully support dual x-carriages can use this mode for optimal travel results.</li> <li>Mode 1: Auto-park Mode. (<code class="highlighter-rouge">M605 S1</code>) The firmware automatically parks/unparks the carriages on tool-change. No slicer support is required. (<code class="highlighter-rouge">M605 S1</code>)</li> <li>Mode 2: Duplication Mode. (<code class="highlighter-rouge">M605 S2 X[offs] R[temp]</code>) The firmware will transparently make the second x-carriage and extruder copy all actions of the first x-carriage. This allows the printer to print 2 arbitrary items at once. (The 2nd extruder’s X and temp offsets are set using: <code class="highlighter-rouge">M605 S2 X[offs] R[offs]</code>.)</li> </ul> <h2 id="todo-options">TODO Options…</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">// Activate a solenoid on the active extruder with M380. Disable all with M381.
 // Define SOL0_PIN, SOL1_PIN, etc., for each extruder that has a solenoid.
 //#define EXT_SOLENOID
 </span>
@@ -745,157 +712,53 @@
 </span>
 <span class="c1">// The timeout (in ms) to return to the status screen from sub-menus
 //#define LCD_TIMEOUT_TO_STATUS 15000
+</span></code></pre> </div> <h2 id="sd-card-extras">SD Card Extras</h2> <p>The options listed below help to fix, improve, and optimize SD Card performance.</p> <h3 id="sd-detect-inverted">SD Detect Inverted</h3> <div class="highlighter-rouge"> <pre class="highlight"><code>  #define SD_DETECT_INVERTED
+</code></pre> </div> <p>Some RAMPS and other boards don’t detect when an SD card is inserted. You can work around this by connecting a push button or single throw switch to the pin defined as <code class="highlighter-rouge">SD_DETECT_PIN</code> in your board’s pins definitions. This setting should be disabled unless you are using a push button, pulling the pin to ground. Note: This option is forced off for most LCD controllers (all <code class="highlighter-rouge">ULTIPANEL</code> except <code class="highlighter-rouge">ELB_FULL_GRAPHIC_CONTROLLER</code>).</p> <h3 id="sd-finished-stepper-release">SD Finished Stepper Release</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#define SD_FINISHED_STEPPERRELEASE true          // Disable steppers when SD Print is finished
+#define SD_FINISHED_RELEASECOMMAND "M84 X Y Z E" // You might want to keep the z enabled so your bed stays in place.
+</span></code></pre> </div> <h3 id="sd-menu-autostart">SD Menu Autostart</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define MENU_ADDAUTOSTART  // Add an option in the menu to run all auto#.g files
+</span></code></pre> </div> <h3 id="sd-card-sorting">SD Card Sorting</h3> <h4 id="recent-first">Recent First</h4> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#define SDCARD_RATHERRECENTFIRST
+</span></code></pre> </div> <p>Reverse SD sort to show “more recent” files first, according to the card’s FAT. Since the FAT gets out of order with usage, <code class="highlighter-rouge">SDCARD_SORT_ALPHA</code> is recommended.</p> <h4 id="alpha-sort">Alpha Sort</h4> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define SDCARD_SORT_ALPHA
 </span>
-<span class="cp">#if ENABLED(SDSUPPORT)
-</span>
-  <span class="c1">// Some RAMPS and other boards don't detect when an SD card is inserted. You can work
-</span>  <span class="c1">// around this by connecting a push button or single throw switch to the pin defined
-</span>  <span class="c1">// as SD_DETECT_PIN in your board's pins definitions.
-</span>  <span class="c1">// This setting should be disabled unless you are using a push button, pulling the pin to ground.
-</span>  <span class="c1">// Note: This is always disabled for ULTIPANEL (except ELB_FULL_GRAPHIC_CONTROLLER).
-</span>  <span class="cp">#define SD_DETECT_INVERTED
-</span>
-  <span class="cp">#define SD_FINISHED_STEPPERRELEASE true          // Disable steppers when SD Print is finished
-</span>  <span class="cp">#define SD_FINISHED_RELEASECOMMAND "M84 X Y Z E" // You might want to keep the z enabled so your bed stays in place.
-</span>
-  <span class="c1">// Reverse SD sort to show "more recent" files first, according to the card's FAT.
-</span>  <span class="c1">// Since the FAT gets out of order with usage, SDCARD_SORT_ALPHA is recommended.
-</span>  <span class="cp">#define SDCARD_RATHERRECENTFIRST
-</span>
-  <span class="c1">// Add an option in the menu to run all auto#.g files
-</span>  <span class="c1">//#define MENU_ADDAUTOSTART
-</span>
-  <span class="cm">/**
-   * Sort SD file listings in alphabetical order.
-   *
-   * With this option enabled, items on SD cards will be sorted
-   * by name for easier navigation.
-   *
-   * By default...
-   *
-   *  - Use the slowest -but safest- method for sorting.
-   *  - Folders are sorted to the top.
-   *  - The sort key is statically allocated.
-   *  - No added G-code (M34) support.
-   *  - 40 item sorting limit. (Items after the first 40 are unsorted.)
-   *
-   * SD sorting uses static allocation (as set by SDSORT_LIMIT), allowing the
-   * compiler to calculate the worst-case usage and throw an error if the SRAM
-   * limit is exceeded.
-   *
-   *  - SDSORT_USES_RAM provides faster sorting via a static directory buffer.
-   *  - SDSORT_USES_STACK does the same, but uses a local stack-based buffer.
-   *  - SDSORT_CACHE_NAMES will retain the sorted file listing in RAM. (Expensive!)
-   *  - SDSORT_DYNAMIC_RAM only uses RAM when the SD menu is visible. (Use with caution!)
-   */</span>
-  <span class="c1">//#define SDCARD_SORT_ALPHA
-</span>
-  <span class="c1">// SD Card Sorting options
-</span>  <span class="cp">#if ENABLED(SDCARD_SORT_ALPHA)
-</span>    <span class="cp">#define SDSORT_LIMIT       40     // Maximum number of sorted items (10-256). Costs 27 bytes each.
-</span>    <span class="cp">#define FOLDER_SORTING     -1     // -1=above  0=none  1=below
-</span>    <span class="cp">#define SDSORT_GCODE       false  // Allow turning sorting on/off with LCD and M34 g-code.
-</span>    <span class="cp">#define SDSORT_USES_RAM    false  // Pre-allocate a static array for faster pre-sorting.
-</span>    <span class="cp">#define SDSORT_USES_STACK  false  // Prefer the stack for pre-sorting to give back some SRAM. (Negated by next 2 options.)
-</span>    <span class="cp">#define SDSORT_CACHE_NAMES false  // Keep sorted items in RAM longer for speedy performance. Most expensive option.
-</span>    <span class="cp">#define SDSORT_DYNAMIC_RAM false  // Use dynamic allocation (within SD menus). Least expensive option. Set SDSORT_LIMIT before use!
-</span>    <span class="cp">#define SDSORT_CACHE_VFATS 2      // Maximum number of 13-byte VFAT entries to use for sorting.
-</span>                                      <span class="c1">// Note: Only affects SCROLL_LONG_FILENAMES with SDSORT_CACHE_NAMES but not SDSORT_DYNAMIC_RAM.
-</span>  <span class="cp">#endif
-</span>
-  <span class="c1">// Show a progress bar on HD44780 LCDs for SD printing
-</span>  <span class="c1">//#define LCD_PROGRESS_BAR
-</span>
-  <span class="cp">#if ENABLED(LCD_PROGRESS_BAR)
-</span>    <span class="c1">// Amount of time (ms) to show the bar
-</span>    <span class="cp">#define PROGRESS_BAR_BAR_TIME 2000
-</span>    <span class="c1">// Amount of time (ms) to show the status message
-</span>    <span class="cp">#define PROGRESS_BAR_MSG_TIME 3000
-</span>    <span class="c1">// Amount of time (ms) to retain the status message (0=forever)
-</span>    <span class="cp">#define PROGRESS_MSG_EXPIRE   0
-</span>    <span class="c1">// Enable this to show messages for MSG_TIME then hide them
-</span>    <span class="c1">//#define PROGRESS_MSG_ONCE
-</span>    <span class="c1">// Add a menu item to test the progress bar:
-</span>    <span class="c1">//#define LCD_PROGRESS_BAR_TEST
-</span>  <span class="cp">#endif
-</span>
-  <span class="c1">// Add an 'M73' G-code to set the current percentage
-</span>  <span class="c1">//#define LCD_SET_PROGRESS_MANUALLY
-</span>
-  <span class="c1">// This allows hosts to request long names for files and folders with M33
-</span>  <span class="c1">//#define LONG_FILENAME_HOST_SUPPORT
-</span>
-  <span class="c1">// Enable this option to scroll long filenames in the SD card menu
-</span>  <span class="c1">//#define SCROLL_LONG_FILENAMES
-</span>
-  <span class="cm">/**
-   * This option allows you to abort SD printing when any endstop is triggered.
-   * This feature must be enabled with "M540 S1" or from the LCD menu.
-   * To have any effect, endstops must be enabled during SD printing.
-   */</span>
-  <span class="c1">//#define ABORT_ON_ENDSTOP_HIT_FEATURE_ENABLED
-</span>
-  <span class="cm">/**
-   * This option makes it easier to print the same SD Card file again.
-   * On print completion the LCD Menu will open with the file selected.
-   * You can just click to start the print, or navigate elsewhere.
-   */</span>
-  <span class="c1">//#define SD_REPRINT_LAST_SELECTED_FILE
-</span>
-<span class="cp">#endif // SDSUPPORT
-</span>
-<span class="cm">/**
- * Additional options for Graphical Displays
- *
- * Use the optimizations here to improve printing performance,
- * which can be adversely affected by graphical display drawing,
- * especially when doing several short moves, and when printing
- * on DELTA and SCARA machines.
- *
- * Some of these options may result in the display lagging behind
- * controller events, as there is a trade-off between reliable
- * printing performance versus fast display updates.
- */</span>
-<span class="cp">#if ENABLED(DOGLCD)
-</span>  <span class="c1">// Enable to save many cycles by drawing a hollow frame on the Info Screen
-</span>  <span class="cp">#define XYZ_HOLLOW_FRAME
-</span>
-  <span class="c1">// Enable to save many cycles by drawing a hollow frame on Menu Screens
-</span>  <span class="cp">#define MENU_HOLLOW_FRAME
-</span>
-  <span class="c1">// A bigger font is available for edit items. Costs 3120 bytes of PROGMEM.
-</span>  <span class="c1">// Western only. Not available for Cyrillic, Kana, Turkish, Greek, or Chinese.
-</span>  <span class="c1">//#define USE_BIG_EDIT_FONT
-</span>
-  <span class="c1">// A smaller font may be used on the Info Screen. Costs 2300 bytes of PROGMEM.
-</span>  <span class="c1">// Western only. Not available for Cyrillic, Kana, Turkish, Greek, or Chinese.
-</span>  <span class="c1">//#define USE_SMALL_INFOFONT
-</span>
-  <span class="c1">// Enable this option and reduce the value to optimize screen updates.
-</span>  <span class="c1">// The normal delay is 10µs. Use the lowest value that still gives a reliable display.
-</span>  <span class="c1">//#define DOGM_SPI_DELAY_US 5
-</span>
-<span class="cp">#endif // DOGLCD
-</span>
-<span class="c1">// The hardware watchdog should reset the microcontroller disabling all outputs,
-// in case the firmware gets stuck and doesn't do temperature regulation.
-</span><span class="cp">#define USE_WATCHDOG
-</span>
-<span class="cp">#if ENABLED(USE_WATCHDOG)
-</span>  <span class="c1">// If you have a watchdog reboot in an ArduinoMega2560 then the device will hang forever, as a watchdog reset will leave the watchdog on.
-</span>  <span class="c1">// The "WATCHDOG_RESET_MANUAL" goes around this by not using the hardware reset.
-</span>  <span class="c1">//  However, THIS FEATURE IS UNSAFE!, as it will only work if interrupts are disabled. And the code could hang in an interrupt routine with interrupts disabled.
+<span class="c1">// SD Card Sorting options
+</span><span class="cp">#if ENABLED(SDCARD_SORT_ALPHA)
+</span>  <span class="cp">#define SDSORT_LIMIT       40     // Maximum number of sorted items (10-256). Costs 27 bytes each.
+</span>  <span class="cp">#define FOLDER_SORTING     -1     // -1=above  0=none  1=below
+</span>  <span class="cp">#define SDSORT_GCODE       false  // Allow turning sorting on/off with LCD and M34 g-code.
+</span>  <span class="cp">#define SDSORT_USES_RAM    false  // Pre-allocate a static array for faster pre-sorting.
+</span>  <span class="cp">#define SDSORT_USES_STACK  false  // Prefer the stack for pre-sorting to give back some SRAM. (Negated by next 2 options.)
+</span>  <span class="cp">#define SDSORT_CACHE_NAMES false  // Keep sorted items in RAM longer for speedy performance. Most expensive option.
+</span>  <span class="cp">#define SDSORT_DYNAMIC_RAM false  // Use dynamic allocation (within SD menus). Least expensive option. Set SDSORT_LIMIT before use!
+</span>  <span class="cp">#define SDSORT_CACHE_VFATS 2      // Maximum number of 13-byte VFAT entries to use for sorting.
+</span>                                    <span class="c1">// Note: Only affects SCROLL_LONG_FILENAMES with SDSORT_CACHE_NAMES but not SDSORT_DYNAMIC_RAM.
+</span><span class="cp">#endif
+</span></code></pre> </div> <p>With this option enabled, items on SD cards will be sorted by name for easier navigation.</p> <p>By default…</p> <ul> <li>Use the slowest -but safest- method for sorting.</li> <li>Folders are sorted to the top.</li> <li>The sort key is statically allocated.</li> <li>No added G-code (<code class="highlighter-rouge">M34</code>) support.</li> <li>40 item sorting limit. (Items after the first 40 are unsorted.)</li> </ul> <p>SD sorting uses static allocation (as set by <code class="highlighter-rouge">SDSORT_LIMIT</code>), allowing the compiler to calculate the worst-case usage and throw an error if the SRAM limit is exceeded.</p> <ul> <li> <code class="highlighter-rouge">SDSORT_USES_RAM</code> provides faster sorting via a static directory buffer.</li> <li> <code class="highlighter-rouge">SDSORT_USES_STACK</code> does the same, but uses a local stack-based buffer.</li> <li> <code class="highlighter-rouge">SDSORT_CACHE_NAMES</code> will retain the sorted file listing in RAM. (Expensive!)</li> <li> <code class="highlighter-rouge">SDSORT_DYNAMIC_RAM</code> only uses RAM when the SD menu is visible. (Use with caution!)</li> </ul> <h3 id="progress-bar-character-lcd">Progress Bar (character LCD)</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define LCD_PROGRESS_BAR
+</span><span class="cp">#if ENABLED(LCD_PROGRESS_BAR)
+</span>  <span class="cp">#define PROGRESS_BAR_BAR_TIME 2000  // Amount of time (ms) to show the progress bar
+</span>  <span class="cp">#define PROGRESS_BAR_MSG_TIME 3000  // Amount of time (ms) to show the status message
+</span>  <span class="cp">#define PROGRESS_MSG_EXPIRE      0  // Amount of time (ms) to retain the status message (0=forever)
+</span>  <span class="c1">//#define PROGRESS_MSG_ONCE         // Show messages for MSG_TIME then hide them
+</span>  <span class="c1">//#define LCD_PROGRESS_BAR_TEST     // Add a menu item to test the progress bar.
+</span><span class="cp">#endif
+</span></code></pre> </div> <p>Show a progress bar on HD44780 LCDs for SD printing. Sub-options determine how long to show the progress bar and status message, how long to retain the status message, and whether to include a progress bar test in the Debug menu.</p> <h3 id="set-print-progress">Set Print Progress</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define LCD_SET_PROGRESS_MANUALLY
+</span></code></pre> </div> <p>Add an <code class="highlighter-rouge">M73</code> G-code to set the current percentage.</p> <h3 id="long-filename-host-support">Long Filename Host Support</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define LONG_FILENAME_HOST_SUPPORT
+</span></code></pre> </div> <p>Allow hosts to request long names for files and folders with <code class="highlighter-rouge">M33 [path]</code>.</p> <h3 id="scroll-long-filenames">Scroll Long Filenames</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define SCROLL_LONG_FILENAMES
+</span></code></pre> </div> <p>Enable this option to scroll long filenames in the SD card menu.</p> <h3 id="abort-on-endstop-hit">Abort on Endstop Hit</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define ABORT_ON_ENDSTOP_HIT_FEATURE_ENABLED
+</span></code></pre> </div> <p>Add an option for the firmware to abort SD printing if any endstop is triggered. Turn on with <code class="highlighter-rouge">M540 S1</code> (or from the LCD menu) and make sure endstops are enabled (<code class="highlighter-rouge">M120</code>) during SD printing.</p> <h3 id="reprint-last-file">Reprint Last File</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define SD_REPRINT_LAST_SELECTED_FILE
+</span></code></pre> </div> <p>This option makes it easier to print the same SD Card file again. Whenever an SD print completes the LCD Menu will open with the same file selected. From there you can click to start a new print, or you can navigate elsewhere.</p> <h2 id="graphical-display-extras">Graphical Display Extras</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#if ENABLED(DOGLCD)
+</span>  <span class="cp">#define XYZ_HOLLOW_FRAME      // Enable to save many cycles by drawing a hollow frame on the Info Screen
+</span>  <span class="cp">#define MENU_HOLLOW_FRAME     // Enable to save many cycles by drawing a hollow frame on Menu Screens
+</span>  <span class="c1">//#define USE_BIG_EDIT_FONT   // A bigger font is available for edit items. Costs 3120 bytes of PROGMEM.
+</span>                                <span class="c1">// Western only. Not available for Cyrillic, Kana, Turkish, Greek, or Chinese.
+</span>  <span class="c1">//#define USE_SMALL_INFOFONT  // A smaller font may be used on the Info Screen. Costs 2300 bytes of PROGMEM.
+</span>                                <span class="c1">// Western only. Not available for Cyrillic, Kana, Turkish, Greek, or Chinese.
+</span>  <span class="c1">//#define DOGM_SPI_DELAY_US 5 // Enable this option and reduce the value to optimize screen updates.
+</span>                                <span class="c1">// The normal delay is 10µs. Use the lowest value that still gives a reliable display.
+</span><span class="cp">#endif
+</span></code></pre> </div> <p>Use the optimizations here to improve printing performance, which can be adversely affected by graphical display drawing, especially when doing several short moves, and when printing on DELTA and SCARA machines.</p> <p>Some of these options may result in the display lagging behind controller events, as there is a trade-off between reliable printing performance versus fast display updates.</p> <h2 id="watchdog">Watchdog</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#define USE_WATCHDOG
+</span></code></pre> </div> <p>The hardware watchdog should reset the microcontroller, disabling all outputs, in case the firmware gets stuck and doesn’t do temperature regulation.</p> <h3 id="watchdog-manual-reset">Watchdog Manual Reset</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#if ENABLED(USE_WATCHDOG)
 </span>  <span class="c1">//#define WATCHDOG_RESET_MANUAL
 </span><span class="cp">#endif
-</span>
-<span class="cm">/**
- * Babystepping enables movement of the axes by tiny increments without changing
- * the current position values. This feature is used primarily to adjust the Z
- * axis in the first layer of a print in real-time.
- *
- * Warning: Does not respect endstops!
- */</span>
-<span class="c1">//#define BABYSTEPPING
+</span></code></pre> </div> <p>If you have a watchdog reboot in an ATmega2560 the device can hang forever, as a watchdog reset will leave the watchdog on. The <code class="highlighter-rouge">WATCHDOG_RESET_MANUAL</code> option works around this by eschewing the hardware reset. However, <strong>this feature is unsafe</strong> because it only works if interrupts are disabled, and the code could hang in an interrupt routine with interrupts disabled.</p> <h2 id="babystepping">Babystepping</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define BABYSTEPPING
 </span><span class="cp">#if ENABLED(BABYSTEPPING)
 </span>  <span class="c1">//#define BABYSTEP_XY              // Also enable X/Y Babystepping. Not supported on DELTA!
 </span>  <span class="cp">#define BABYSTEP_INVERT_Z false    // Change if Z babysteps should go the other way
@@ -907,62 +770,26 @@
 </span>  <span class="c1">//#define BABYSTEP_ZPROBE_GFX_OVERLAY // Enable graphical overlay on Z-offset editor
 </span>  <span class="c1">//#define BABYSTEP_ZPROBE_GFX_REVERSE // Reverses the direction of the CW/CCW indicators
 </span><span class="cp">#endif
-</span>
-<span class="cm">/**
- * Implementation of linear pressure control
- *
- * Assumption: advance = k * (delta velocity)
- * K=0 means advance disabled.
- * See Marlin documentation for calibration instructions.
- */</span>
-<span class="c1">//#define LIN_ADVANCE
+</span></code></pre> </div> <p>Babystepping enables <code class="highlighter-rouge">M290</code> and LCD menu items to move the axes by tiny increments without changing the current position values. This feature is used primarily to adjust the Z axis in the first layer of a print in real-time. <em>Warning: Does not respect endstops!</em></p> <h2 id="linear-advance">Linear Advance</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define LIN_ADVANCE
 </span>
 <span class="cp">#if ENABLED(LIN_ADVANCE)
 </span>  <span class="cp">#define LIN_ADVANCE_K 75
-</span>
-  <span class="cm">/**
-   * Some Slicers produce Gcode with randomly jumping extrusion widths occasionally.
-   * For example within a 0.4mm perimeter it may produce a single segment of 0.05mm width.
-   * While this is harmless for normal printing (the fluid nature of the filament will
-   * close this very, very tiny gap), it throws off the LIN_ADVANCE pressure adaption.
-   *
-   * For this case LIN_ADVANCE_E_D_RATIO can be used to set the extrusion:distance ratio
-   * to a fixed value. Note that using a fixed ratio will lead to wrong nozzle pressures
-   * if the slicer is using variable widths or layer heights within one print!
-   *
-   * This option sets the default E:D ratio at startup. Use `M900` to override this value.
-   *
-   * Example: `M900 W0.4 H0.2 D1.75`, where:
-   *   - W is the extrusion width in mm
-   *   - H is the layer height in mm
-   *   - D is the filament diameter in mm
-   *
-   * Example: `M900 R0.0458` to set the ratio directly.
-   *
-   * Set to 0 to auto-detect the ratio based on given Gcode G1 print moves.
-   *
-   * Slic3r (including Průša Control) produces Gcode compatible with the automatic mode.
-   * Cura (as of this writing) may produce Gcode incompatible with the automatic mode.
-   */</span>
-  <span class="cp">#define LIN_ADVANCE_E_D_RATIO 0 // The calculated ratio (or 0) according to the formula W * H / ((D / 2) ^ 2 * PI)
+</span>  <span class="cp">#define LIN_ADVANCE_E_D_RATIO 0 // The calculated ratio (or 0) according to the formula W * H / ((D / 2) ^ 2 * PI)
 </span>                                  <span class="c1">// Example: 0.4 * 0.2 / ((1.75 / 2) ^ 2 * PI) = 0.033260135
 </span><span class="cp">#endif
-</span>
-<span class="cp">#if ENABLED(DELTA) &amp;&amp; !defined(DELTA_PROBEABLE_RADIUS)
+</span></code></pre> </div> <p>This feature allows Marlin to use linear pressure control for print extrusion, to eliminate ooze, improve corners, etc. See <code class="highlighter-rouge">Configuration_adv.h</code> and the <a href="/docs/features/lin_advance.html">Linear Advance page</a> for more complete documentation.</p> <h2 id="delta--scara-limits">Delta / Scara Limits</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#if ENABLED(DELTA) &amp;&amp; !defined(DELTA_PROBEABLE_RADIUS)
 </span>  <span class="cp">#define DELTA_PROBEABLE_RADIUS DELTA_PRINTABLE_RADIUS
 #elif IS_SCARA &amp;&amp; !defined(SCARA_PRINTABLE_RADIUS)
 </span>  <span class="cp">#define SCARA_PRINTABLE_RADIUS (SCARA_LINKAGE_1 + SCARA_LINKAGE_2)
 #endif
-</span>
-<span class="cp">#if ENABLED(MESH_BED_LEVELING) || ENABLED(AUTO_BED_LEVELING_UBL)
+</span></code></pre> </div> <h2 id="custom-mesh-bounds">Custom Mesh Bounds</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#if ENABLED(MESH_BED_LEVELING) || ENABLED(AUTO_BED_LEVELING_UBL)
 </span>  <span class="c1">// Override the mesh area if the automatic (max) area is too large
 </span>  <span class="c1">//#define MESH_MIN_X MESH_INSET
 </span>  <span class="c1">//#define MESH_MIN_Y MESH_INSET
 </span>  <span class="c1">//#define MESH_MAX_X X_BED_SIZE - (MESH_INSET)
 </span>  <span class="c1">//#define MESH_MAX_Y Y_BED_SIZE - (MESH_INSET)
 </span><span class="cp">#endif
-</span>
-<span class="c1">//
+</span></code></pre> </div> <h2 id="enhanced-g-code">Enhanced G-code</h2> <h3 id="g2g3-arc">G2/G3 Arc</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//
 // G2/G3 Arc Support
 //
 </span><span class="cp">#define ARC_SUPPORT               // Disable this feature to save ~3226 bytes
@@ -972,101 +799,39 @@
 </span>  <span class="c1">//#define ARC_P_CIRCLES         // Enable the 'P' parameter to specify complete circles
 </span>  <span class="c1">//#define CNC_WORKSPACE_PLANES  // Allow G2/G3 to operate in XY, ZX, or YZ planes
 </span><span class="cp">#endif
-</span>
-<span class="c1">// Support for G5 with XYZE destination and IJPQ offsets. Requires ~2666 bytes.
-//#define BEZIER_CURVE_SUPPORT
-</span>
-<span class="c1">// G38.2 and G38.3 Probe Target
-// Enable PROBE_DOUBLE_TOUCH if you want G38 to double touch
-//#define G38_PROBE_TARGET
+</span></code></pre> </div> <h3 id="g5-bezier-curve">G5 Bezier Curve</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define BEZIER_CURVE_SUPPORT
+</span></code></pre> </div> <p>Support for <code class="highlighter-rouge">G5</code> with XYZE destination and IJPQ offsets. Requires ~2666 bytes.</p> <h3 id="g382g383-probe-target">G38.2/G38.3 Probe Target</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define G38_PROBE_TARGET
 </span><span class="cp">#if ENABLED(G38_PROBE_TARGET)
-</span>  <span class="cp">#define G38_MINIMUM_MOVE 0.0275 // minimum distance in mm that will produce a move (determined using the print statement in check_move)
+</span>  <span class="cp">#define G38_MINIMUM_MOVE 0.0275 // (mm) Minimum distance that will produce a move
 #endif
-</span>
-<span class="c1">// Moves (or segments) with fewer steps than this will be joined with the next move
-</span><span class="cp">#define MIN_STEPS_PER_SEGMENT 6
-</span>
-<span class="c1">// The minimum pulse width (in µs) for stepping a stepper.
-// Set this if you find stepping unreliable, or if using a very fast CPU.
-</span><span class="cp">#define MINIMUM_STEPPER_PULSE 0 // (µs) The smallest stepper pulse allowed
-</span>
-<span class="c1">// Control heater 0 and heater 1 in parallel.
-//#define HEATERS_PARALLEL
-</span>
-<span class="c1">// The number of linear motions that can be in the plan at any give time.
-// THE BLOCK_BUFFER_SIZE NEEDS TO BE A POWER OF 2, i.g. 8,16,32 because shifts and ors are used to do the ring-buffering.
-</span><span class="cp">#if ENABLED(SDSUPPORT)
+</span></code></pre> </div> <p>Add commands <code class="highlighter-rouge">G38.2</code> and <code class="highlighter-rouge">G38.3</code> to probe towards target. Enable <code class="highlighter-rouge">PROBE_DOUBLE_TOUCH</code> if you want <code class="highlighter-rouge">G38</code> to double touch.</p> <h2 id="minimum-steps-per-segment">Minimum Steps Per Segment</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#define MIN_STEPS_PER_SEGMENT 6
+</span></code></pre> </div> <p>Moves (or segments) with fewer steps than this will be joined with the next move.</p> <h2 id="minimum-stepper-pulse">Minimum Stepper Pulse</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#define MINIMUM_STEPPER_PULSE 0 // (µs) The smallest stepper pulse allowed
+</span></code></pre> </div> <p>The minimum pulse width (in µs) for stepping a stepper. Set this if you find stepping unreliable, or if using a very fast CPU.</p> <h2 id="parallel-heaters">Parallel Heaters</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define HEATERS_PARALLEL
+</span></code></pre> </div> <p>Control heater 0 and heater 1 in parallel.</p> <h2 id="buffer--hosts">Buffer / Hosts</h2> <h3 id="block-buffer">Block Buffer</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#if ENABLED(SDSUPPORT)
 </span>  <span class="cp">#define BLOCK_BUFFER_SIZE 16 // SD,LCD,Buttons take more memory, block buffer needs to be smaller
 #else
 </span>  <span class="cp">#define BLOCK_BUFFER_SIZE 16 // maximize block buffer
 #endif
-</span>
-<span class="c1">// The ASCII buffer for serial input
-</span><span class="cp">#define MAX_CMD_SIZE 96
+</span></code></pre> </div> <p>The number of linear motions that can be in the plan at any give time. The <code class="highlighter-rouge">BLOCK_BUFFER_SIZE</code> must be a power of 2, (8, 16, 32, etc.) because shifts and ors are used to do the ring-buffering.</p> <h3 id="serial-command-buffer">Serial Command Buffer</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#define MAX_CMD_SIZE 96
 #define BUFSIZE 4
-</span>
-<span class="c1">// Transmission to Host Buffer Size
-// To save 386 bytes of PROGMEM (and TX_BUFFER_SIZE+3 bytes of RAM) set to 0.
-// To buffer a simple "ok" you need 4 bytes.
-// For ADVANCED_OK (M105) you need 32 bytes.
-// For debug-echo: 128 bytes for the optimal speed.
-// Other output doesn't need to be that speedy.
-// :[0, 2, 4, 8, 16, 32, 64, 128, 256]
-</span><span class="cp">#define TX_BUFFER_SIZE 0
-</span>
-<span class="c1">// Host Receive Buffer Size
-// Without XON/XOFF flow control (see SERIAL_XON_XOFF below) 32 bytes should be enough.
-// To use flow control, set this buffer size to at least 1024 bytes.
-// :[0, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048]
-//#define RX_BUFFER_SIZE 1024
-</span>
-<span class="cp">#if RX_BUFFER_SIZE &gt;= 1024
+</span></code></pre> </div> <p>The ASCII buffer for serial input. Individual command line length is set by <code class="highlighter-rouge">MAX_CMD_SIZE</code>, and should be long enough to hold a complete G-code line. Set the number of lines with <code class="highlighter-rouge">BUFSIZE</code>.</p> <h3 id="transmit-to-host-buffer">Transmit to Host Buffer</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#define TX_BUFFER_SIZE 0
+</span></code></pre> </div> <p>Transmission to Host buffer size. To save 386 bytes of PROGMEM (and <code class="highlighter-rouge">TX_BUFFER_SIZE</code>+3 bytes of SRAM) set to 0. To buffer a simple “ok” you need 4 bytes. An <code class="highlighter-rouge">ADVANCED_OK</code> (<code class="highlighter-rouge">M105</code>) needs 32 bytes. For debug-echo: 128 bytes for the optimal speed. Other output doesn’t need to be that speedy.</p> <h3 id="host-receive-buffer">Host Receive Buffer</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define RX_BUFFER_SIZE 1024
+</span><span class="cp">#if RX_BUFFER_SIZE &gt;= 1024
 </span>  <span class="c1">// Enable to have the controller send XON/XOFF control characters to
 </span>  <span class="c1">// the host to signal the RX buffer is becoming full.
 </span>  <span class="c1">//#define SERIAL_XON_XOFF
 </span><span class="cp">#endif
-</span>
-<span class="cp">#if ENABLED(SDSUPPORT)
-</span>  <span class="c1">// Enable this option to collect and display the maximum
-</span>  <span class="c1">// RX queue usage after transferring a file to SD.
+</span></code></pre> </div> <p>Host Receive buffer size. Without XON/XOFF flow control (see <code class="highlighter-rouge">SERIAL_XON_XOFF</code> below) 32 bytes should be enough. To use flow control, set this buffer size to at least 1024 bytes.</p> <h3 id="sd-transfer-stats">SD Transfer Stats</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#if ENABLED(SDSUPPORT)
+</span>  <span class="c1">// Collect and display the maximum RX queue usage after an SD file transfer.
 </span>  <span class="c1">//#define SERIAL_STATS_MAX_RX_QUEUED
 </span>
-  <span class="c1">// Enable this option to collect and display the number
-</span>  <span class="c1">// of dropped bytes after a file transfer to SD.
+  <span class="c1">// Collect and display the number of dropped bytes after an SD file transfer.
 </span>  <span class="c1">//#define SERIAL_STATS_DROPPED_RX
 </span><span class="cp">#endif
-</span>
-<span class="c1">// Enable an emergency-command parser to intercept certain commands as they
-// enter the serial receive buffer, so they cannot be blocked.
-// Currently handles M108, M112, M410
-// Does not work on boards using AT90USB (USBCON) processors!
-//#define EMERGENCY_PARSER
-</span>
-<span class="c1">// Bad Serial-connections can miss a received command by sending an 'ok'
-// Therefore some clients abort after 30 seconds in a timeout.
-// Some other clients start sending commands while receiving a 'wait'.
-// This "wait" is only sent when the buffer is empty. 1 second is a good value here.
-//#define NO_TIMEOUTS 1000 // Milliseconds
-</span>
-<span class="c1">// Some clients will have this feature soon. This could make the NO_TIMEOUTS unnecessary.
-//#define ADVANCED_OK
-</span>
-<span class="cm">/**
- * Firmware-based and LCD-controlled retract
- *
- * Add G10 / G11 commands for automatic firmware-based retract / recover.
- * Use M207 and M208 to define parameters for retract / recover.
- *
- * Use M209 to enable or disable auto-retract.
- * With auto-retract enabled, all G1 E moves within the set range
- * will be converted to firmware-based retract/recover moves.
- *
- * Be sure to turn off auto-retract during filament change.
- *
- * Note that M207 / M208 / M209 settings are saved to EEPROM.
- *
- */</span>
-<span class="c1">//#define FWRETRACT  // ONLY PARTIALLY TESTED
+</span></code></pre> </div> <h3 id="emergency-parser">Emergency Parser</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define EMERGENCY_PARSER
+</span></code></pre> </div> <p>Enable an emergency-command parser to intercept certain commands as they enter the serial receive buffer, so they cannot be blocked. Currently handles <code class="highlighter-rouge">M108</code>, <code class="highlighter-rouge">M112</code>, and <code class="highlighter-rouge">M410</code>. Does not work on boards using AT90USB (USBCON) processors!</p> <h3 id="no-timeouts">No Timeouts</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define NO_TIMEOUTS 1000 // (ms)
+</span></code></pre> </div> <p>Bad serial connections can miss a received command by sending an “ok”, and some hosts will abort after 30 seconds. Some hosts start sending commands while receiving a ‘wait’. This “wait” is only sent when the buffer is empty. 1 second is a good value here. The <code class="highlighter-rouge">HOST_KEEPALIVE</code> feature provides another way to keep the host alive.</p> <h3 id="advanced-ok">Advanced OK</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define ADVANCED_OK
+</span></code></pre> </div> <p>Include extra information about the buffer in “ok” messages. Some hosts will have this feature soon. This could make the <code class="highlighter-rouge">NO_TIMEOUTS</code> unnecessary.</p> <h2 id="firmware-retraction">Firmware Retraction</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define FWRETRACT  // ONLY PARTIALLY TESTED
 </span><span class="cp">#if ENABLED(FWRETRACT)
 </span>  <span class="cp">#define MIN_AUTORETRACT 0.1             // When auto-retract is on, convert E moves of this length and over
 </span>  <span class="cp">#define MAX_AUTORETRACT 10.0            // Upper limit for auto-retract conversion
@@ -1079,26 +844,8 @@
 </span>  <span class="cp">#define RETRACT_RECOVER_FEEDRATE 8      // Default feedrate for recovering from retraction (mm/s)
 </span>  <span class="cp">#define RETRACT_RECOVER_FEEDRATE_SWAP 8 // Default feedrate for recovering from swap retraction (mm/s)
 #endif
-</span>
-<span class="cm">/**
- * Extra Fan Speed
- * Adds a secondary fan speed for each print-cooling fan.
- *   'M106 P&lt;fan&gt; T3-255' : Set a secondary speed for &lt;fan&gt;
- *   'M106 P&lt;fan&gt; T2'     : Use the set secondary speed
- *   'M106 P&lt;fan&gt; T1'     : Restore the previous fan speed
- */</span>
-<span class="c1">//#define EXTRA_FAN_SPEED
-</span>
-<span class="cm">/**
- * Advanced Pause
- * Experimental feature for filament change support and for parking the nozzle when paused.
- * Adds the GCode M600 for initiating filament change.
- * If PARK_HEAD_ON_PAUSE enabled, adds the GCode M125 to pause printing and park the nozzle.
- *
- * Requires an LCD display.
- * This feature is required for the default FILAMENT_RUNOUT_SCRIPT.
- */</span>
-<span class="c1">//#define ADVANCED_PAUSE_FEATURE
+</span></code></pre> </div> <p>This option adds <code class="highlighter-rouge">G10</code>/<code class="highlighter-rouge">G11</code> commands for automatic firmware-based retract/recover. Use <code class="highlighter-rouge">M207</code> and <code class="highlighter-rouge">M208</code> to set the parameters, and <code class="highlighter-rouge">M209</code> to enable/disable. With auto-retract enabled, all <code class="highlighter-rouge">G1 E</code> moves within the set range will be converted to firmware-based retract/recover moves.</p> <p><strong>Be sure to turn off auto-retract during filament change!</strong> All <code class="highlighter-rouge">M207</code>/<code class="highlighter-rouge">M208</code>/<code class="highlighter-rouge">M209</code> settings are saved to EEPROM.</p> <h2 id="extra-fan-speed">Extra Fan Speed</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define EXTRA_FAN_SPEED
+</span></code></pre> </div> <p>Add a secondary fan speed for each print-cooling fan.</p> <ul> <li> <code class="highlighter-rouge">M106 P[fan] T3-255</code> sets a secondary speed for [fan].</li> <li> <code class="highlighter-rouge">M106 P[fan] T2</code> uses the set secondary speed.</li> <li> <code class="highlighter-rouge">M106 P[fan] T1</code> restores the previous fan speed</li> </ul> <h2 id="advanced-pause">Advanced Pause</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define ADVANCED_PAUSE_FEATURE
 </span><span class="cp">#if ENABLED(ADVANCED_PAUSE_FEATURE)
 </span>  <span class="cp">#define PAUSE_PARK_X_POS 3                  // X position of hotend
 </span>  <span class="cp">#define PAUSE_PARK_Y_POS 3                  // Y position of hotend
@@ -1129,337 +876,31 @@
 </span>  <span class="c1">//#define PARK_HEAD_ON_PAUSE                // Go to filament change position on pause, return to print position on resume
 </span>  <span class="c1">//#define HOME_BEFORE_FILAMENT_CHANGE       // Ensure homing has been completed prior to parking for filament change
 </span><span class="cp">#endif
-</span>
-<span class="cm">/**
- * Enable this section if you have TMC26X motor drivers.
- * You will need to import the TMC26XStepper library into the Arduino IDE for this
- * (https://github.com/trinamic/TMC26XStepper.git)
- */</span>
-<span class="c1">//#define HAVE_TMCDRIVER
-</span>
-<span class="cp">#if ENABLED(HAVE_TMCDRIVER)
-</span>
-  <span class="c1">//#define X_IS_TMC
-</span>  <span class="c1">//#define X2_IS_TMC
-</span>  <span class="c1">//#define Y_IS_TMC
-</span>  <span class="c1">//#define Y2_IS_TMC
-</span>  <span class="c1">//#define Z_IS_TMC
-</span>  <span class="c1">//#define Z2_IS_TMC
-</span>  <span class="c1">//#define E0_IS_TMC
-</span>  <span class="c1">//#define E1_IS_TMC
-</span>  <span class="c1">//#define E2_IS_TMC
-</span>  <span class="c1">//#define E3_IS_TMC
-</span>  <span class="c1">//#define E4_IS_TMC
-</span>
-  <span class="cp">#define X_MAX_CURRENT     1000 // in mA
-</span>  <span class="cp">#define X_SENSE_RESISTOR    91 // in mOhms
-</span>  <span class="cp">#define X_MICROSTEPS        16 // number of microsteps
-</span>
-  <span class="cp">#define X2_MAX_CURRENT    1000
-</span>  <span class="cp">#define X2_SENSE_RESISTOR   91
-</span>  <span class="cp">#define X2_MICROSTEPS       16
-</span>
-  <span class="cp">#define Y_MAX_CURRENT     1000
-</span>  <span class="cp">#define Y_SENSE_RESISTOR    91
-</span>  <span class="cp">#define Y_MICROSTEPS        16
-</span>
-  <span class="cp">#define Y2_MAX_CURRENT    1000
-</span>  <span class="cp">#define Y2_SENSE_RESISTOR   91
-</span>  <span class="cp">#define Y2_MICROSTEPS       16
-</span>
-  <span class="cp">#define Z_MAX_CURRENT     1000
-</span>  <span class="cp">#define Z_SENSE_RESISTOR    91
-</span>  <span class="cp">#define Z_MICROSTEPS        16
-</span>
-  <span class="cp">#define Z2_MAX_CURRENT    1000
-</span>  <span class="cp">#define Z2_SENSE_RESISTOR   91
-</span>  <span class="cp">#define Z2_MICROSTEPS       16
-</span>
-  <span class="cp">#define E0_MAX_CURRENT    1000
-</span>  <span class="cp">#define E0_SENSE_RESISTOR   91
-</span>  <span class="cp">#define E0_MICROSTEPS       16
-</span>
-  <span class="cp">#define E1_MAX_CURRENT    1000
-</span>  <span class="cp">#define E1_SENSE_RESISTOR   91
-</span>  <span class="cp">#define E1_MICROSTEPS       16
-</span>
-  <span class="cp">#define E2_MAX_CURRENT    1000
-</span>  <span class="cp">#define E2_SENSE_RESISTOR   91
-</span>  <span class="cp">#define E2_MICROSTEPS       16
-</span>
-  <span class="cp">#define E3_MAX_CURRENT    1000
-</span>  <span class="cp">#define E3_SENSE_RESISTOR   91
-</span>  <span class="cp">#define E3_MICROSTEPS       16
-</span>
-  <span class="cp">#define E4_MAX_CURRENT    1000
-</span>  <span class="cp">#define E4_SENSE_RESISTOR   91
-</span>  <span class="cp">#define E4_MICROSTEPS       16
-</span>
-<span class="cp">#endif
-</span>
-<span class="cm">/**
- * Enable this for SilentStepStick Trinamic TMC2130 SPI-configurable stepper drivers.
- *
- * You'll also need the TMC2130Stepper Arduino library
- * (https://github.com/teemuatlut/TMC2130Stepper).
- *
- * To use TMC2130 stepper drivers in SPI mode connect your SPI2130 pins to
- * the hardware SPI interface on your board and define the required CS pins
- * in your `pins_MYBOARD.h` file. (e.g., RAMPS 1.4 uses AUX3 pins `X_CS_PIN 53`, `Y_CS_PIN 49`, etc.).
- */</span>
-<span class="c1">//#define HAVE_TMC2130
-</span>
-<span class="cp">#if ENABLED(HAVE_TMC2130)
-</span>
-  <span class="c1">// CHOOSE YOUR MOTORS HERE, THIS IS MANDATORY
-</span>  <span class="c1">//#define X_IS_TMC2130
-</span>  <span class="c1">//#define X2_IS_TMC2130
-</span>  <span class="c1">//#define Y_IS_TMC2130
-</span>  <span class="c1">//#define Y2_IS_TMC2130
-</span>  <span class="c1">//#define Z_IS_TMC2130
-</span>  <span class="c1">//#define Z2_IS_TMC2130
-</span>  <span class="c1">//#define E0_IS_TMC2130
-</span>  <span class="c1">//#define E1_IS_TMC2130
-</span>  <span class="c1">//#define E2_IS_TMC2130
-</span>  <span class="c1">//#define E3_IS_TMC2130
-</span>  <span class="c1">//#define E4_IS_TMC2130
-</span>
-  <span class="cm">/**
-   * Stepper driver settings
-   */</span>
-
-  <span class="cp">#define R_SENSE           0.11  // R_sense resistor for SilentStepStick2130
-</span>  <span class="cp">#define HOLD_MULTIPLIER    0.5  // Scales down the holding current from run current
-</span>  <span class="cp">#define INTERPOLATE          1  // Interpolate X/Y/Z_MICROSTEPS to 256
-</span>
-  <span class="cp">#define X_CURRENT         1000  // rms current in mA. Multiply by 1.41 for peak current.
-</span>  <span class="cp">#define X_MICROSTEPS        16  // 0..256
-</span>
-  <span class="cp">#define Y_CURRENT         1000
-</span>  <span class="cp">#define Y_MICROSTEPS        16
-</span>
-  <span class="cp">#define Z_CURRENT         1000
-</span>  <span class="cp">#define Z_MICROSTEPS        16
-</span>
-  <span class="c1">//#define X2_CURRENT      1000
-</span>  <span class="c1">//#define X2_MICROSTEPS     16
-</span>
-  <span class="c1">//#define Y2_CURRENT      1000
-</span>  <span class="c1">//#define Y2_MICROSTEPS     16
-</span>
-  <span class="c1">//#define Z2_CURRENT      1000
-</span>  <span class="c1">//#define Z2_MICROSTEPS     16
-</span>
-  <span class="c1">//#define E0_CURRENT      1000
-</span>  <span class="c1">//#define E0_MICROSTEPS     16
-</span>
-  <span class="c1">//#define E1_CURRENT      1000
-</span>  <span class="c1">//#define E1_MICROSTEPS     16
-</span>
-  <span class="c1">//#define E2_CURRENT      1000
-</span>  <span class="c1">//#define E2_MICROSTEPS     16
-</span>
-  <span class="c1">//#define E3_CURRENT      1000
-</span>  <span class="c1">//#define E3_MICROSTEPS     16
-</span>
-  <span class="c1">//#define E4_CURRENT      1000
-</span>  <span class="c1">//#define E4_MICROSTEPS     16
-</span>
-  <span class="cm">/**
-   * Use Trinamic's ultra quiet stepping mode.
-   * When disabled, Marlin will use spreadCycle stepping mode.
-   */</span>
-  <span class="cp">#define STEALTHCHOP
-</span>
-  <span class="cm">/**
-   * Let Marlin automatically control stepper current.
-   * This is still an experimental feature.
-   * Increase current every 5s by CURRENT_STEP until stepper temperature prewarn gets triggered,
-   * then decrease current by CURRENT_STEP until temperature prewarn is cleared.
-   * Adjusting starts from X/Y/Z/E_CURRENT but will not increase over AUTO_ADJUST_MAX
-   * Relevant g-codes:
-   * M906 - Set or get motor current in milliamps using axis codes X, Y, Z, E. Report values if no axis codes given.
-   * M906 S1 - Start adjusting current
-   * M906 S0 - Stop adjusting current
-   * M911 - Report stepper driver overtemperature pre-warn condition.
-   * M912 - Clear stepper driver overtemperature pre-warn condition flag.
-   */</span>
-  <span class="c1">//#define AUTOMATIC_CURRENT_CONTROL
-</span>
-  <span class="cp">#if ENABLED(AUTOMATIC_CURRENT_CONTROL)
-</span>    <span class="cp">#define CURRENT_STEP          50  // [mA]
-</span>    <span class="cp">#define AUTO_ADJUST_MAX     1300  // [mA], 1300mA_rms = 1840mA_peak
-</span>    <span class="cp">#define REPORT_CURRENT_CHANGE
-</span>  <span class="cp">#endif
-</span>
-  <span class="cm">/**
-   * The driver will switch to spreadCycle when stepper speed is over HYBRID_THRESHOLD.
-   * This mode allows for faster movements at the expense of higher noise levels.
-   * STEALTHCHOP needs to be enabled.
-   * M913 X/Y/Z/E to live tune the setting
-   */</span>
-  <span class="c1">//#define HYBRID_THRESHOLD
-</span>
-  <span class="cp">#define X_HYBRID_THRESHOLD     100  // [mm/s]
-</span>  <span class="cp">#define X2_HYBRID_THRESHOLD    100
-</span>  <span class="cp">#define Y_HYBRID_THRESHOLD     100
-</span>  <span class="cp">#define Y2_HYBRID_THRESHOLD    100
-</span>  <span class="cp">#define Z_HYBRID_THRESHOLD       4
-</span>  <span class="cp">#define Z2_HYBRID_THRESHOLD      4
-</span>  <span class="cp">#define E0_HYBRID_THRESHOLD     30
-</span>  <span class="cp">#define E1_HYBRID_THRESHOLD     30
-</span>  <span class="cp">#define E2_HYBRID_THRESHOLD     30
-</span>  <span class="cp">#define E3_HYBRID_THRESHOLD     30
-</span>  <span class="cp">#define E4_HYBRID_THRESHOLD     30
-</span>
-  <span class="cm">/**
-   * Use stallGuard2 to sense an obstacle and trigger an endstop.
-   * You need to place a wire from the driver's DIAG1 pin to the X/Y endstop pin.
-   * If used along with STEALTHCHOP, the movement will be louder when homing. This is normal.
-   *
-   * X/Y_HOMING_SENSITIVITY is used for tuning the trigger sensitivity.
-   * Higher values make the system LESS sensitive.
-   * Lower value make the system MORE sensitive.
-   * Too low values can lead to false positives, while too high values will collide the axis without triggering.
-   * It is advised to set X/Y_HOME_BUMP_MM to 0.
-   * M914 X/Y to live tune the setting
-   */</span>
-  <span class="c1">//#define SENSORLESS_HOMING
-</span>
-  <span class="cp">#if ENABLED(SENSORLESS_HOMING)
-</span>    <span class="cp">#define X_HOMING_SENSITIVITY  19
-</span>    <span class="cp">#define Y_HOMING_SENSITIVITY  19
-</span>  <span class="cp">#endif
-</span>
-  <span class="cm">/**
-   * You can set your own advanced settings by filling in predefined functions.
-   * A list of available functions can be found on the library github page
-   * https://github.com/teemuatlut/TMC2130Stepper
-   *
-   * Example:
-   * #define TMC2130_ADV() { \
-   *   stepperX.diag0_temp_prewarn(1); \
-   *   stepperX.interpolate(0); \
-   * }
-   */</span>
-  <span class="cp">#define  TMC2130_ADV() {  }
-</span>
-<span class="cp">#endif // HAVE_TMC2130
-</span>
-<span class="cm">/**
- * Enable this section if you have L6470 motor drivers.
- * You need to import the L6470 library into the Arduino IDE for this.
- * (https://github.com/ameyer/Arduino-L6470)
- */</span>
-
-<span class="c1">//#define HAVE_L6470DRIVER
-</span><span class="cp">#if ENABLED(HAVE_L6470DRIVER)
-</span>
-  <span class="c1">//#define X_IS_L6470
-</span>  <span class="c1">//#define X2_IS_L6470
-</span>  <span class="c1">//#define Y_IS_L6470
-</span>  <span class="c1">//#define Y2_IS_L6470
-</span>  <span class="c1">//#define Z_IS_L6470
-</span>  <span class="c1">//#define Z2_IS_L6470
-</span>  <span class="c1">//#define E0_IS_L6470
-</span>  <span class="c1">//#define E1_IS_L6470
-</span>  <span class="c1">//#define E2_IS_L6470
-</span>  <span class="c1">//#define E3_IS_L6470
-</span>  <span class="c1">//#define E4_IS_L6470
-</span>
-  <span class="cp">#define X_MICROSTEPS      16 // number of microsteps
-</span>  <span class="cp">#define X_OVERCURRENT   2000 // maxc current in mA. If the current goes over this value, the driver will switch off
-</span>  <span class="cp">#define X_STALLCURRENT  1500 // current in mA where the driver will detect a stall
-</span>
-  <span class="cp">#define X2_MICROSTEPS     16
-</span>  <span class="cp">#define X2_OVERCURRENT  2000
-</span>  <span class="cp">#define X2_STALLCURRENT 1500
-</span>
-  <span class="cp">#define Y_MICROSTEPS      16
-</span>  <span class="cp">#define Y_OVERCURRENT   2000
-</span>  <span class="cp">#define Y_STALLCURRENT  1500
-</span>
-  <span class="cp">#define Y2_MICROSTEPS     16
-</span>  <span class="cp">#define Y2_OVERCURRENT  2000
-</span>  <span class="cp">#define Y2_STALLCURRENT 1500
-</span>
-  <span class="cp">#define Z_MICROSTEPS      16
-</span>  <span class="cp">#define Z_OVERCURRENT   2000
-</span>  <span class="cp">#define Z_STALLCURRENT  1500
-</span>
-  <span class="cp">#define Z2_MICROSTEPS     16
-</span>  <span class="cp">#define Z2_OVERCURRENT  2000
-</span>  <span class="cp">#define Z2_STALLCURRENT 1500
-</span>
-  <span class="cp">#define E0_MICROSTEPS     16
-</span>  <span class="cp">#define E0_OVERCURRENT  2000
-</span>  <span class="cp">#define E0_STALLCURRENT 1500
-</span>
-  <span class="cp">#define E1_MICROSTEPS     16
-</span>  <span class="cp">#define E1_OVERCURRENT  2000
-</span>  <span class="cp">#define E1_STALLCURRENT 1500
-</span>
-  <span class="cp">#define E2_MICROSTEPS     16
-</span>  <span class="cp">#define E2_OVERCURRENT  2000
-</span>  <span class="cp">#define E2_STALLCURRENT 1500
-</span>
-  <span class="cp">#define E3_MICROSTEPS     16
-</span>  <span class="cp">#define E3_OVERCURRENT  2000
-</span>  <span class="cp">#define E3_STALLCURRENT 1500
-</span>
-  <span class="cp">#define E4_MICROSTEPS     16
-</span>  <span class="cp">#define E4_OVERCURRENT  2000
-</span>  <span class="cp">#define E4_STALLCURRENT 1500
-</span>
-<span class="cp">#endif
-</span>
-<span class="cm">/**
- * TWI/I2C BUS
- *
- * This feature is an EXPERIMENTAL feature so it shall not be used on production
- * machines. Enabling this will allow you to send and receive I2C data from slave
- * devices on the bus.
- *
- * ; Example #1
- * ; This macro send the string "Marlin" to the slave device with address 0x63 (99)
- * ; It uses multiple M260 commands with one B&lt;base 10&gt; arg
- * M260 A99  ; Target slave address
- * M260 B77  ; M
- * M260 B97  ; a
- * M260 B114 ; r
- * M260 B108 ; l
- * M260 B105 ; i
- * M260 B110 ; n
- * M260 S1   ; Send the current buffer
- *
- * ; Example #2
- * ; Request 6 bytes from slave device with address 0x63 (99)
- * M261 A99 B5
- *
- * ; Example #3
- * ; Example serial output of a M261 request
- * echo:i2c-reply: from:99 bytes:5 data:hello
- */</span>
-
-<span class="c1">//#define EXPERIMENTAL_I2CBUS
+</span></code></pre> </div> <p>Experimental feature for filament change support and parking the nozzle when paused. Adds the <code class="highlighter-rouge">M600</code> command to perform a filament change. With <code class="highlighter-rouge">PARK_HEAD_ON_PAUSE</code> enabled also adds the <code class="highlighter-rouge">M125</code> command to pause printing and park the nozzle. Requires an LCD display. Note that <code class="highlighter-rouge">M600</code> is required for the default <code class="highlighter-rouge">FILAMENT_RUNOUT_SCRIPT</code>.</p> <h2 id="stepper-drivers-1">Stepper Drivers</h2> <h3 id="trinamic-tmc26x">Trinamic TMC26X</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define HAVE_TMCDRIVER
+</span></code></pre> </div> <p>Enable this section if you have TMC26X motor drivers. You’ll need to import the <a href="https://github.com/trinamic/TMC26XStepper.git">TMC26XStepper</a> library into the Arduino IDE. See the <code class="highlighter-rouge">Configuration_adv.h</code> file for the full set of sub-options.</p> <h3 id="trinamic-tmc2130">Trinamic TMC2130</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define HAVE_TMC2130
+</span></code></pre> </div> <p>Enable this option for SilentStepStick Trinamic TMC2130 SPI-configurable stepper drivers. You’ll also need the <a href="https://github.com/teemuatlut/TMC2130Stepper">TMC2130Stepper</a> Arduino library. See the <code class="highlighter-rouge">Configuration_adv.h</code> file for the full set of sub-options.</p> <p>To use TMC2130 stepper drivers in SPI mode connect your SPI2130 pins to the hardware SPI interface on your board and define the required CS pins in your <code class="highlighter-rouge">pins_MYBOARD.h</code> file. (e.g., RAMPS 1.4 uses AUX3 pins <code class="highlighter-rouge">X_CS_PIN 53</code>, <code class="highlighter-rouge">Y_CS_PIN 49</code>, etc.).</p> <h3 id="l6470-drivers">L6470 Drivers</h3> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define HAVE_L6470DRIVER
+</span></code></pre> </div> <p>Enable this section if you have L6470 motor drivers. You need to import the <a href="https://github.com/ameyer/Arduino-L6470">L6470 library</a> into the Arduino IDE for this. See the <code class="highlighter-rouge">Configuration_adv.h</code> file for the full set of sub-options.</p> <h2 id="experimental-i2c-bus">Experimental i2c Bus</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define EXPERIMENTAL_I2CBUS
 </span><span class="cp">#define I2C_SLAVE_ADDRESS  0 // Set a value from 8 to 127 to act as a slave
-</span>
-<span class="cm">/**
- * Spindle &amp; Laser control
- *
- * Add the M3, M4, and M5 commands to turn the spindle/laser on and off, and
- * to set spindle speed, spindle direction, and laser power.
- *
- * SuperPid is a router/spindle speed controller used in the CNC milling community.
- * Marlin can be used to turn the spindle on and off. It can also be used to set
- * the spindle speed from 5,000 to 30,000 RPM.
- *
- * You'll need to select a pin for the ON/OFF function and optionally choose a 0-5V
- * hardware PWM pin for the speed control and a pin for the rotation direction.
- *
- * See http://marlinfw.org/docs/configuration/laser_spindle.html for more config details.
- */</span>
-<span class="c1">//#define SPINDLE_LASER_ENABLE
+</span></code></pre> </div> <p>This feature can be used to talk to slave devices on the i2c bus, passing data back to the host. With additional work the <code class="highlighter-rouge">TWIBus</code> class can be used to build a full protocol and add remote control features to Marlin, distributing load over two or more boards.</p> <pre><code class="language-gcode">; Example #1
+; This macro send the string "Marlin" to the slave device with address 0x63 (99)
+; It uses multiple M260 commands with one B[base 10] arg
+M260 A99  ; Target slave address
+M260 B77  ; M
+M260 B97  ; a
+M260 B114 ; r
+M260 B108 ; l
+M260 B105 ; i
+M260 B110 ; n
+M260 S1   ; Send the current buffer
+
+; Example #2
+; Request 6 bytes from slave device with address 0x63 (99)
+M261 A99 B5
+
+; Example #3
+; Example serial output of a M261 request
+echo:i2c-reply: from:99 bytes:5 data:hello
+</code></pre> <h2 id="spindle--laser">Spindle / Laser</h2> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define SPINDLE_LASER_ENABLE
 </span><span class="cp">#if ENABLED(SPINDLE_LASER_ENABLE)
 </span>
   <span class="cp">#define SPINDLE_LASER_ENABLE_INVERT   false  // set to "true" if the on/off function is reversed
@@ -1477,7 +918,7 @@
    *  SPEED/POWER = PWM duty cycle * SPEED_POWER_SLOPE + SPEED_POWER_INTERCEPT
    *    where PWM duty cycle varies from 0 to 255
    *
-   *  set the following for your controller (ALL MUST BE SET)
+   *  Set the following for your controller (ALL MUST BE SET)
    */</span>
 
   <span class="cp">#define SPEED_POWER_SLOPE    118.4
@@ -1490,7 +931,7 @@
 </span>  <span class="c1">//#define SPEED_POWER_MIN       10
 </span>  <span class="c1">//#define SPEED_POWER_MAX      100      // 0-100%
 </span><span class="cp">#endif
-</span></code></pre> </div> <h2 id="filament-width-sensor">Filament Width Sensor</h2> <iframe style="float:right;margin:0 0 1em 1em;" title="YouTube video player" width="240" height="195" src="http://www.youtube.com/embed/W93dFxF425s?autoplay=0" frameborder="0" allowfullscreen=""></iframe> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define FILAMENT_WIDTH_SENSOR
+</span></code></pre> </div> <p>Enable for Spindle and Laser control. Adds the <code class="highlighter-rouge">M3</code>, <code class="highlighter-rouge">M4</code>, and <code class="highlighter-rouge">M5</code> commands to turn the spindle/laser on and off, and to set spindle speed, spindle direction, and laser power.</p> <p>SuperPid is a router/spindle speed controller used in the CNC milling community. Marlin can be used to turn the spindle on and off. It can also be used to set the spindle speed from 5,000 to 30,000 RPM.</p> <p>You’ll need to select a pin for the ON/OFF function and optionally choose a 0-5V hardware PWM pin for the speed control and a pin for the rotation direction.</p> <p>See the <a href="/docs/configuration/laser_spindle.html">Laser and Spindle page</a> for more details.</p> <h2 id="filament-width-sensor">Filament Width Sensor</h2> <iframe style="float:right;margin:0 0 1em 1em;" title="YouTube video player" width="240" height="195" src="http://www.youtube.com/embed/W93dFxF425s?autoplay=0" frameborder="0" allowfullscreen=""></iframe> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="c1">//#define FILAMENT_WIDTH_SENSOR
 </span></code></pre> </div> <p>Enable to add support for a filament width sensor such as <a href="http://www.thingiverse.com/thing:454584">Filament Width Sensor Prototype Version 3</a>. With a filament sensor installed, Marlin can adjust the flow rate according to the measured filament width. Adjust the sub-options below according to your setup.</p> <p>Only a single extruder is supported at this time.</p> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#define FILAMENT_SENSOR_EXTRUDER_NUM 0
 </span></code></pre> </div> <p>Only one extruder can have a filament sensor. Specify here which extruder has it.</p> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#define MEASUREMENT_DELAY_CM        14
 </span></code></pre> </div> <p>Distance from the filament width sensor to the melt chamber.</p> <div class="language-cpp highlighter-rouge"> <pre class="highlight"><code><span class="cp">#define MEASURED_UPPER_LIMIT         3.30 // (mm) Upper limit used to validate sensor reading
